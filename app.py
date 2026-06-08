@@ -14,6 +14,97 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Translation Dictionary
+TRANSLATIONS = {
+    "en": {
+        "page_title": "AI Job Career Level Classifier",
+        "subtitle": "Enter a job title, description, location, and industry, and the machine learning model will predict the Career Level associated with it. The model is trained on a database of 8,000+ job listings.",
+        "config": "🛠️ Configuration",
+        "lang_label": "Select Language / Chọn ngôn ngữ",
+        "select_model": "Select Prediction Model",
+        "model_details": "📊 Model Details",
+        "cv_notes": "🎓 Developer CV Notes",
+        "cv_points": [
+            "Modular Code Structure (`src/` architecture).",
+            "Custom Algorithm Implementation (LDA built from scratch).",
+            "Imbalanced Data Handling (using RandomOverSampler).",
+            "Web App Deployment (Streamlit & Plotly integrations)."
+        ],
+        "job_details": "📝 Job Details",
+        "job_title_label": "Job Title",
+        "location_label": "Location",
+        "job_function_label": "Job Function",
+        "industry_label": "Industry",
+        "job_desc_label": "Job Description",
+        "predict_btn": "Predict Career Level",
+        "pred_result": "🎯 Prediction Result",
+        "predicted_level": "Predicted Career Level:",
+        "prob_dist": "Prediction Probability Distribution",
+        "lda_map": "🗺️ 2D Linear Discriminant Analysis Map",
+        "lda_map_desc": "See where your input job falls in the semantic clusters of career levels:",
+        "lda_title": "Linear Discriminant Subspace (LD1 vs LD2)",
+        "your_job": "Your Job Input",
+        "awaiting_input_title": "👈 Awaiting Input",
+        "awaiting_input_desc": "Fill in the job details on the left and click **Predict Career Level** to see the machine learning model classification and spatial projections.",
+        "model_desc_scratch": "**Custom Linear Discriminant Analysis**\n- **Accuracy:** `67.3%`\n- **Pros:** Implemented completely from scratch using Eigen-decomposition. Robust on minority classes after balancing.\n- **Math Concept:** Projects high-dimensional TF-IDF vectors onto a subspace that maximizes class separation.",
+        "model_desc_sklearn": "**Sklearn LDA (SVD Solver)**\n- **Accuracy:** `67.4%`\n- **Pros:** Highly optimal dimensions separation. Fast prediction times.\n- **Note:** Standard scikit-learn SVD implementation with top 300 features (SelectKBest).",
+        "model_desc_rf": "**Random Forest Classifier**\n- **Accuracy:** `74.2%`\n- **Pros:** Highest overall accuracy. Excellent on majority classes.\n- **Cons:** Less sensitive to rare/minority classes compared to geometric LDA."
+    },
+    "vi": {
+        "page_title": "Bộ phân loại cấp độ nghề nghiệp bằng AI",
+        "subtitle": "Nhập tiêu đề công việc, mô tả công việc, địa điểm và ngành nghề để mô hình học máy dự đoán Cấp độ nghề nghiệp tương ứng. Mô hình được huấn luyện trên cơ sở dữ liệu hơn 8,000 tin tuyển dụng.",
+        "config": "🛠️ Cấu hình hệ thống",
+        "lang_label": "Select Language / Chọn ngôn ngữ",
+        "select_model": "Chọn mô hình dự đoán",
+        "model_details": "📊 Chi tiết thuật toán",
+        "cv_notes": "🎓 Điểm nhấn CV lập trình viên",
+        "cv_points": [
+            "Cấu trúc mã nguồn dạng module (kiến trúc thư mục `src/`).",
+            "Tự triển khai thuật toán từ đầu (LDA viết từ scratch).",
+            "Xử lý mất cân bằng dữ liệu (sử dụng RandomOverSampler).",
+            "Triển khai ứng dụng Web (tích hợp Streamlit & Plotly)."
+        ],
+        "job_details": "📝 Thông tin công việc",
+        "job_title_label": "Tiêu đề công việc",
+        "location_label": "Địa điểm",
+        "job_function_label": "Lĩnh vực chuyên môn",
+        "industry_label": "Ngành nghề",
+        "job_desc_label": "Mô tả công việc",
+        "predict_btn": "Dự đoán cấp độ nghề nghiệp",
+        "pred_result": "🎯 Kết quả dự đoán",
+        "predicted_level": "Cấp độ nghề nghiệp dự đoán:",
+        "prob_dist": "Phân phối xác suất dự đoán",
+        "lda_map": "🗺️ Bản đồ phân tích biệt thức tuyến tính 2D (LDA)",
+        "lda_map_desc": "Xem công việc của bạn nằm ở đâu trong các cụm phân loại hình học của cấp độ nghề nghiệp:",
+        "lda_title": "Không gian con LDA (Trục LD1 so với LD2)",
+        "your_job": "Công việc của bạn",
+        "awaiting_input_title": "👈 Đang chờ thông tin",
+        "awaiting_input_desc": "Điền thông tin công việc ở cột bên trái và nhấn nút **Dự đoán cấp độ nghề nghiệp** để xem kết quả phân loại và biểu đồ không gian của mô hình.",
+        "model_desc_scratch": "**LDA tự xây dựng (Scratch)**\n- **Độ chính xác:** `67.3%`\n- **Ưu điểm:** Tự viết thuật toán 100% bằng cách phân rã trị riêng. Cực kỳ nhạy bén với lớp thiểu số sau khi oversampling.\n- **Nguyên lý:** Chiếu các vector TF-IDF chiều cao xuống không gian con tối đa hóa sự phân tách giữa các lớp.",
+        "model_desc_sklearn": "**Sklearn LDA (SVD)**\n- **Độ chính xác:** `67.4%`\n- **Ưu điểm:** Phân tách không gian rất tối ưu. Tốc độ dự đoán cực nhanh.\n- **Chi tiết:** Sử dụng bộ giải SVD mặc định của thư viện scikit-learn với 300 đặc trưng tốt nhất (SelectKBest).",
+        "model_desc_rf": "**Random Forest Classifier**\n- **Độ chính xác:** `74.2%`\n- **Ưu điểm:** Đạt độ chính xác tổng thể cao nhất. Phân loại rất tốt trên các nhãn đa số.\n- **Nhược điểm:** Kém nhạy bén hơn với các nhãn thiểu số (nhóm hiếm)."
+    }
+}
+
+CAREER_LEVEL_MAPPING = {
+    "en": {
+        "senior_specialist_or_project_manager": "Senior Specialist / Project Manager",
+        "manager_team_leader": "Manager / Team Leader",
+        "bereichsleiter": "Department Head (Bereichsleiter)",
+        "director_business_unit_leader": "Director / Business Unit Leader",
+        "specialist": "Specialist",
+        "managing_director_small_medium_company": "Managing Director (SME)"
+    },
+    "vi": {
+        "senior_specialist_or_project_manager": "Chuyên viên cao cấp / Quản lý dự án",
+        "manager_team_leader": "Trưởng nhóm / Quản lý",
+        "bereichsleiter": "Trưởng bộ phận (Bereichsleiter)",
+        "director_business_unit_leader": "Giám đốc bộ phận",
+        "specialist": "Chuyên viên",
+        "managing_director_small_medium_company": "Giám đốc điều hành (Công ty vừa và nhỏ)"
+    }
+}
+
 # Custom Styling (Glassmorphism + Sleek Dark Theme)
 st.markdown("""
     <style>
@@ -123,58 +214,46 @@ except Exception as e:
     st.error(f"Error loading models/data: {e}. Please run the training script first.")
     st.stop()
 
-# --- SIDEBAR ---
+# --- SIDEBAR & LANGUAGE SWITCHER ---
 with st.sidebar:
-    st.markdown("### 🛠️ Configuration")
+    # Language Toggle
+    lang_choice = st.radio(
+        "🌐 Language / Ngôn ngữ",
+        options=["English", "Tiếng Việt"],
+        index=0,
+        horizontal=True
+    )
+    
+    # Map to "en" or "vi"
+    lang_code = "en" if lang_choice == "English" else "vi"
+    t = TRANSLATIONS[lang_code]
+    
+    st.markdown(f"### {t['config']}")
     
     # Model Selector
     model_choice = st.selectbox(
-        "Select Prediction Model",
+        t["select_model"],
         options=["Scratch LDA (Custom)", "Sklearn LDA", "Random Forest"],
-        index=0,
-        help="Choose which machine learning algorithm to run for classification."
+        index=0
     )
     
     st.markdown("---")
-    st.markdown("### 📊 Model Details")
+    st.markdown(f"### {t['model_details']}")
     if model_choice == "Scratch LDA (Custom)":
-        st.markdown("""
-        **Custom Linear Discriminant Analysis**
-        - **Accuracy:** `67.3%`
-        - **Pros:** Implemented completely from scratch using Eigen-decomposition. Robust on minority classes after balancing.
-        - **Math Concept:** Projects high-dimensional TF-IDF vectors onto a subspace that maximizes class separation.
-        """)
+        st.markdown(t["model_desc_scratch"])
     elif model_choice == "Sklearn LDA":
-        st.markdown("""
-        **Sklearn LDA (SVD Solver)**
-        - **Accuracy:** `67.4%`
-        - **Pros:** Highly optimal dimensions separation. Fast prediction times.
-        - **Note:** Standard scikit-learn SVD implementation with top 300 features (SelectKBest).
-        """)
+        st.markdown(t["model_desc_sklearn"])
     else:
-        st.markdown("""
-        **Random Forest Classifier**
-        - **Accuracy:** `74.2%`
-        - **Pros:** Highest overall accuracy. Excellent on majority classes.
-        - **Cons:** Less sensitive to rare/minority classes compared to geometric LDA.
-        """)
+        st.markdown(t["model_desc_rf"])
         
     st.markdown("---")
-    st.markdown("### 🎓 Developer CV Notes")
-    st.markdown("""
-    This project showcases:
-    1. **Modular Code Structure** (`src/` architecture).
-    2. **Custom Algorithm Implementation** (LDA built from scratch).
-    3. **Imbalanced Data Handling** (using RandomOverSampler).
-    4. **Web App Deployment** (Streamlit & Plotly integrations).
-    """)
+    st.markdown(f"### {t['cv_notes']}")
+    for pt in t["cv_points"]:
+        st.markdown(f"- {pt}")
 
 # --- MAIN PAGE HEADER ---
-st.title("💼 AI Job Career Level Classifier")
-st.markdown("""
-    Enter a job title, description, location, and industry, and the machine learning model will predict the **Career Level** 
-    associated with it. The model is trained on a rich database of 8,000+ job listings.
-""")
+st.title(t["page_title"])
+st.markdown(t["subtitle"])
 
 # Layout: 2 Columns (Inputs in Col 1, Prediction & Visuals in Col 2)
 col1, col2 = st.columns([1.1, 1.2], gap="large")
@@ -182,18 +261,18 @@ col1, col2 = st.columns([1.1, 1.2], gap="large")
 # --- COLUMN 1: INPUTS ---
 with col1:
     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-    st.subheader("📝 Job Details")
+    st.subheader(t["job_details"])
     
     # Job Title Input
     job_title = st.text_input(
-        "Job Title", 
+        t["job_title_label"], 
         value="Lead Technical Architect - Cloud Platform",
         placeholder="e.g. Senior Backend Engineer"
     )
     
     # Location
     location = st.text_input(
-        "Location",
+        t["location_label"],
         value="Seattle, WA",
         placeholder="e.g. Seattle, WA or London, UK"
     )
@@ -204,23 +283,23 @@ with col1:
         "procurement_materials_logistics", "consulting", "engineering", "finance",
         "marketing_public_relations", "human_resources", "administration", "UNKNOWN"
     ]
-    function = st.selectbox("Job Function", options=functions_list, index=0)
+    function = st.selectbox(t["job_function_label"], options=functions_list, index=0)
     
     # Industry
     industry = st.text_input(
-        "Industry",
+        t["industry_label"],
         value="Software Companies",
         placeholder="e.g. Information Technology"
     )
     
     # Description
     description = st.text_area(
-        "Job Description",
+        t["job_desc_label"],
         value="Responsible for leading a team of system engineers. Design, implement, and maintain midrange server infrastructure. Provide technical guidance, architecture patterns, and mentor junior developers. 5+ years of experience required.",
         height=180
     )
     
-    predict_button = st.button("Predict Career Level")
+    predict_button = st.button(t["predict_btn"])
     st.markdown('</div>', unsafe_allow_html=True)
 
 # --- COLUMN 2: RESULTS & VISUALIZATIONS ---
@@ -249,8 +328,8 @@ with col2:
         # Run prediction
         pred_label = active_pipe.predict(input_data)[0]
         
-        # Human-friendly class name mapping
-        friendly_label = pred_label.replace("_", " ").title()
+        # Map output to friendly label depending on language choice
+        mapped_label = CAREER_LEVEL_MAPPING[lang_code].get(pred_label, pred_label.replace("_", " ").title())
         
         # Get Probabilities
         probas = active_pipe.predict_proba(input_data)[0]
@@ -258,13 +337,13 @@ with col2:
         
         # Card 1: Prediction results
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-        st.subheader("🎯 Prediction Result")
-        st.markdown(f"Predicted Career Level:")
-        st.markdown(f'<div class="prediction-badge">{friendly_label}</div>', unsafe_allow_html=True)
+        st.subheader(t["pred_result"])
+        st.markdown(t["predicted_level"])
+        st.markdown(f'<div class="prediction-badge">{mapped_label}</div>', unsafe_allow_html=True)
         
         # Plotly Horizontal Bar Chart for Probabilities
         prob_df = pd.DataFrame({
-            "Career Level": [c.replace("_", " ").title() for c in classes],
+            "Career Level": [CAREER_LEVEL_MAPPING[lang_code].get(c, c.replace("_", " ").title()) for c in classes],
             "Probability": probas
         }).sort_values(by="Probability", ascending=True)
         
@@ -276,7 +355,7 @@ with col2:
             color="Probability",
             color_continuous_scale=["#1f4068", "#45f3ff"],
             text_auto=".1%",
-            title="Prediction Probability Distribution"
+            title=t["prob_dist"]
         )
         fig_prob.update_layout(
             paper_bgcolor="rgba(0,0,0,0)",
@@ -294,8 +373,8 @@ with col2:
         # Card 2: 2D LDA projection map
         if projected_df is not None and model_choice != "Random Forest":
             st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-            st.subheader("🗺️ 2D Linear Discriminant Analysis Map")
-            st.markdown("See where your input job falls in the semantic clusters of career levels:")
+            st.subheader(t["lda_map"])
+            st.markdown(t["lda_map_desc"])
             
             # Step-by-step projection of the new input point
             preprocessor = active_pipe.named_steps["preprocessor"]
@@ -312,16 +391,22 @@ with col2:
             new_ld1 = input_projected[0, 0]
             new_ld2 = input_projected[0, 1]
             
+            # Map classes for the training dots tooltips
+            projected_df_localized = projected_df.copy()
+            projected_df_localized["career_level"] = projected_df_localized["career_level"].apply(
+                lambda c: CAREER_LEVEL_MAPPING[lang_code].get(c, c.replace("_", " ").title())
+            )
+            
             # Create Plotly Scatter
             fig_scatter = px.scatter(
-                projected_df,
+                projected_df_localized,
                 x="LD1",
                 y="LD2",
                 color="career_level",
                 hover_data=["title"],
                 opacity=0.6,
                 color_discrete_sequence=px.colors.qualitative.Safe,
-                title="Linear Discriminant Subspace (LD1 vs LD2)"
+                title=t["lda_title"]
             )
             
             # Add user input marker as a pulsing glowing star
@@ -337,7 +422,7 @@ with col2:
                         line=dict(width=2, color="#ffffff"),
                         shadow=dict(color="#ff0055", width=10)
                     ),
-                    name="Your Job Input",
+                    name=t["your_job"],
                     hovertext=[f"Input: {job_title}"]
                 )
             )
@@ -358,6 +443,6 @@ with col2:
     else:
         # Default Welcome State Card
         st.markdown('<div class="glass-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px;">', unsafe_allow_html=True)
-        st.markdown("### 👈 Awaiting Input")
-        st.markdown("Fill in the job details on the left and click **Predict Career Level** to see the machine learning model classification and spatial projections.")
+        st.markdown(f"### {t['awaiting_input_title']}")
+        st.markdown(t["awaiting_input_desc"])
         st.markdown('</div>', unsafe_allow_html=True)

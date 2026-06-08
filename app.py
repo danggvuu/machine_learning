@@ -245,11 +245,6 @@ with st.sidebar:
         st.markdown(t["model_desc_sklearn"])
     else:
         st.markdown(t["model_desc_rf"])
-        
-    st.markdown("---")
-    st.markdown(f"### {t['cv_notes']}")
-    for pt in t["cv_points"]:
-        st.markdown(f"- {pt}")
 
 # --- MAIN PAGE HEADER ---
 st.title(t["page_title"])

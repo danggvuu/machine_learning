@@ -16,6 +16,3 @@ __pycache__/
 .vscode/
 .idea/
 
-# Local data & model checkpoints (but keeping project files)
-saved_models/*.joblib
-saved_models/*.pkl

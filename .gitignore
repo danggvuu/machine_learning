@@ -1,0 +1,21 @@
+# Python environment files
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE and OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Local data & model checkpoints (but keeping project files)
+saved_models/*.joblib
+saved_models/*.pkl

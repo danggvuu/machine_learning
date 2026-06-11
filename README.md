@@ -141,7 +141,7 @@ streamlit run app.py
 Machine_learning/
 ├── src/
 │   ├── __init__.py
-│   ├── scratch_lda.py       # Thuật toán LDA tự code (tương thích sklearn)
+│   ├── scratch_lda.py       # Thuật toán LDA (tương thích sklearn)
 │   ├── preprocessing.py     # Làm sạch dữ liệu & xây dựng pipeline tiền xử lý
 │   └── train.py             # Script cân bằng dữ liệu, huấn luyện & so sánh mô hình
 ├── notebooks/
